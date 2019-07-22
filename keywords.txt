@@ -12,13 +12,12 @@ NTRIPSever	KEYWORD3
 # Datatypes (KEYWORD1)
 #######################################
 
-NTRIPSever	KEYWORD1
+ntrip_s	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-ntrip_s	KEYWORD2
 subStation	KEYWORD2
 
 #######################################
