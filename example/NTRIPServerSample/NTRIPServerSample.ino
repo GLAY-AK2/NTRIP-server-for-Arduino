@@ -46,10 +46,10 @@ int readcount;
 void loop() {
   // put your main code here, to run repeatedly:
   if (ntrip_s.connected()) {
-    while (Serial.available()) {
+    while (Serial2.available()) {
       readcount = 0;
-      while (Serial.available()) {
-        ch[readcount] = Serial.read();
+      while (Serial2.available()) {
+        ch[readcount] = Serial2.read();
         readcount++;
         if (readcount > 511)break;
       }//buffering
