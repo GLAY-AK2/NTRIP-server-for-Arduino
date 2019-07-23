@@ -17,7 +17,7 @@ NTRIPServer ntrip_s;
 
 void setup() {
   // put your setup code here, to run once:
-// put your setup code here, to run once:
+
   Serial.begin(115200);
   Serial2.begin(115200);
   //Serial2.begin(115200, SERIAL_8N1, 17, 16);
@@ -69,6 +69,5 @@ void loop() {
     }
 
   }
-  //ntrip_s.write((uint8_t*)ch,strlen(ch));
   delay(10);  //server cycle
 }
