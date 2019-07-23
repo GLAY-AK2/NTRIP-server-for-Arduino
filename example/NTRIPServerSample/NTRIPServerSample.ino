@@ -44,24 +44,31 @@ void setup() {
 char ch[512];
 int readcount;
 void loop() {
-  // connect your ESP uart and GNSSreciver uart
-  
-  while (Serial2.available()) {
-    if (ntrip_s.connected())
-      ntrip_s.write(Serial2.read());
-    else {
-      ntrip_s.stop();
-  
-      // reconnect
-      Serial.println("Subscribing MountPoint");
-      if (!ntrip_s.subStation(host, httpPort, mntpnt,psw,srcSTR)) {
-        delay(100);
-      }
-      else {
-        Serial.println("Subscribing MountPoint is OK");
-        delay(10);
-      }
+  // put your main code here, to run repeatedly:
+  if (ntrip_s.connected()) {
+    while (Serial.available()) {
+      readcount = 0;
+      while (Serial.available()) {
+        ch[readcount] = Serial.read();
+        readcount++;
+        if (readcount > 511)break;
+      }//buffering
+      ntrip_s.write((uint8_t*)ch, readcount);
     }
   }
+  else {
+    ntrip_s.stop();
+    Serial.println("reconnect");
+    Serial.println("Subscribing MountPoint");
+    if (!ntrip_s.subStation(host, httpPort, mntpnt, psw, srcSTR)) {
+      delay(100);
+    }
+    else {
+      Serial.println("Subscribing MountPoint is OK");
+      delay(10);
+    }
 
+  }
+  //ntrip_s.write((uint8_t*)ch,strlen(ch));
+  delay(10);  //server cycle
 }
